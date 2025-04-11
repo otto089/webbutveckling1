@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Startsida</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="left-header">
+      <a href="/" class="logo">
+        <img src="/Media/inventerapp-logo-black.png" alt="INVENTERApp logotyp">
+      </a>
+
+      <!-- HAMBURGERE -->
+      <div class="hamburger" id="hamburgerBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <nav class="menu" id="mainMenu">
+        <a href="/" class="active">Startsida</a>
+        <a href="/">Om oss</a>
+        <a href="">Kontakt</a>      
+      </nav>
+    </div>
+
+    <div class="auth-links">
+      <a href="/articles.html">Logga in</a>
+      <button id="openSignupModal" class="button">Skapa konto</button>
+    </div>
+  </header>  
+
+  <main>
+    <div class="hero-slider">
+      <div class="slide active" style="background-image: url('/Media/cold-storage-warehouse.jpg')">
+        <div class="slide-content">
+          <h1>Din partner i vardagen</h1>
+          <p>Snabb, enkel och mobilvänlig inventeringsapp för restauranger och småföretag.</p>
+        </div>
+      </div>
+      <div class="slide" style="background-image: url('/Media/pexels-alexander-isreb-880417-1797428.jpg')">
+        <div class="slide-content">
+          <h1>Få kontroll på lagret</h1>
+          <p>Automatiska beställningsrekommendationer och tydlig översikt.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="block-info">
+      <div class="block-in-block">
+        <h2>Spara tid</h2>
+        <p>Underlätta för dig själv och din personal. I tester vi genomfört har man efter införandet av inventerApp kunnat spara så mycket som 3 timmar i veckan.</p>
+        <button class="button open-signup-modal">Kontakta mig</button>
+      </div>
+      <div class="block-in-block">
+        <h2>Kom igång snabbt!</h2>
+        <p>I vårt startpaket ingår en scanner som vi skickar ut till dig gratis. Du betalar sedan en fast månadskostnad baserat på antal varor du har i ditt register. Prata med oss för mer information.</p>
+        <button class="button open-signup-modal">Beställ startpaket</button>
+      </div>
+      <div class="block-in-block">
+        <h2>Support när du än behöver det!</h2>
+        <p>Vår app är designad med användaren i fokus, för att det ska vara så lätt som möjligt. Men ibland behöver man ändå hjälp. Vårt team är redo att hjälpa dig när du än behöver det.</p>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal" id="sign-up-modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close-modal" id="closeModal">&times;</span>
+      <h2>Registrera dig</h2>
+      <p>Fyll i dina uppgifter så kontaktar vi dig!</p>
+      <form>
+        <label for="name">Namn</label>
+        <input type="text" id="name" name="name" required>
+  
+        <label for="email">E-post</label>
+        <input type="email" id="email" name="email" required>
+  
+        <label for="phone">Telefonnummer</label>
+        <input type="tel" id="phone" name="phone">
+  
+        <button type="submit" class="button">Skicka</button>
+      </form>
+    </div>
+  </div>
+  
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+  
+    setInterval(() => {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }, 8000); // byt bild var 5:e sekund
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const menu = document.getElementById('mainMenu');
+  const signUpBtn = document.getElementById('openSignupModal');
+  const modal = document.getElementById('sign-up-modal');
+  const closeModal = document.getElementById('closeModal');
+
+  // Hamburgermenyn
+  hamburgerBtn.addEventListener('click', () => {
+    menu.classList.toggle('active');
+  });
+
+  // Öppna modalen från knappen i headern
+  signUpBtn.addEventListener('click', () => {
+    modal.style.display = 'flex';
+  });
+
+  // Öppna modal från alla blockknappar
+  const modalButtons = document.querySelectorAll('.open-signup-modal');
+  modalButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      modal.style.display = 'flex';
+    });
+  });
+
+  // Stäng modal via X
+  closeModal.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  // Stäng modal om man klickar utanför innehållet
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+});
+
+
+  </script>
+  
+  
+
+</body>
+</html>

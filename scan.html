@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <title>Scanna artiklar</title>
+  <link rel="stylesheet" href="/styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="logged-in">
+  
+  <header class="header">
+    <div class="left-header">
+      <a href="/" class="logo">
+        <img src="/Media/inventerapp-logo-black.png" alt="INVENTERApp logotyp">
+      </a>
+
+           <!-- HAMBURGERE -->
+           <div class="hamburger" id="hamburgerBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+      <!-- NAVIGATIONSMENY -->
+      <nav class="menu" id="mainMenu">
+        <a href="/">Startsida</a>
+        <a href="/articles.html">Hantera artiklar</a>
+        <a href="/scan.html">Scanna</a>
+      </nav>
+    </div>
+
+    <div class="auth-links">
+      <span>Inloggad som <strong>admin</strong></span>
+      <a href="/" class="button">Logga ut</a>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <h1>Scanna artiklar</h1>
+
+    <section class="scan-mode">
+      <label>
+        <input type="radio" name="scan-mode" value="single" checked>
+        Scanna enskilt (1 scan per enhet)
+      </label>
+      <label>
+        <input type="radio" name="scan-mode" value="count">
+        Ange antal efter scanning
+      </label>
+    </section>
+
+    <section class="scanner-input">
+      <label for="barcode">Scanna här:</label>
+      <input type="text" id="barcode" placeholder="Scanna streckkod" autofocus>
+    </section>
+
+    <section class="scanned-list">
+      <h2>Scannade artiklar</h2>
+      <ul id="itemList"></ul>
+    </section>
+  </main>
+
+  <!-- Modal för att ange antal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Ange antal</h3>
+      <input type="number" id="quantity" min="1" value="1">
+      <div class="modal-actions">
+        <button id="confirmBtn" class="button">Bekräfta</button>
+        <button id="cancelBtn" class="button" style="background-color: #999;">Avbryt</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const barcodeInput = document.getElementById('barcode');
+      const itemList = document.getElementById('itemList');
+      const modal = document.getElementById('modal');
+      const quantityInput = document.getElementById('quantity');
+      const confirmBtn = document.getElementById('confirmBtn');
+      const cancelBtn = document.getElementById('cancelBtn');
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const menu = document.getElementById('mainMenu');
+
+      let currentMode = 'single';
+      let currentBarcode = '';
+
+      // Byt läge
+      document.querySelectorAll('input[name="scan-mode"]').forEach(radio => {
+        radio.addEventListener('change', e => {
+          currentMode = e.target.value;
+        });
+      });
+
+      // Hantera scanner-input (Enter)
+      barcodeInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const code = barcodeInput.value.trim();
+          if (!code) return;
+          barcodeInput.value = '';
+
+          if (currentMode === 'single') {
+            addItemToList(code, 1);
+          } else {
+            currentBarcode = code;
+            quantityInput.value = 1;
+            modal.classList.remove('hidden');
+          }
+        }
+      });
+
+      confirmBtn.addEventListener('click', () => {
+        const qty = parseInt(quantityInput.value, 10);
+        if (qty > 0) {
+          addItemToList(currentBarcode, qty);
+        }
+        modal.classList.add('hidden');
+        currentBarcode = '';
+      });
+
+      cancelBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+        currentBarcode = '';
+      });
+
+      function addItemToList(code, qty) {
+        const li = document.createElement('li');
+        li.textContent = `${code} – antal: ${qty}`;
+        itemList.appendChild(li);
+      }
+
+      // Toggle för hamburgermenyn
+      hamburgerBtn.addEventListener('click', () => {
+        menu.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>

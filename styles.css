@@ -1,0 +1,376 @@
+/*** GRUND ***/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background-color: #e7f3ed;
+  color: #2a2a2a;
+}
+
+/*** Header / Top-line menu ***/
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+.left-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  height: 40px; /* eller justera efter din bild */
+}
+
+.logo img {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+/*** HAMBURGERMENY-KNAPP ***/
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #000;
+}
+
+/*** Meny – synlig bara på stora skärmar ***/
+.menu {
+  gap: 1rem;
+}
+
+@media (min-width: 1111px) {
+  .menu {
+    display: flex;
+  }
+}
+
+/*** Mobilvy (göm meny och visa hamburgare) ***/
+@media (max-width: 1110px) {
+  .menu {
+    display: none;
+    flex-direction: column;
+    background: white;
+    position: absolute;
+    top: 80px; /* justera efter headerhöjd */
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 999;
+  }
+
+  .menu.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* ====== Menylänkar ====== */
+.menu a,
+.menu span {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+/* ---Dölj låsta länkar tills man är inloggad */
+.locked {
+  display: none;
+}
+
+/* ====== Inloggning till höger ====== */
+.auth-links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.auth-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Gemensam stil för alla knappar med klassen .button */
+.button {
+  background-color: #396d53;
+  color: #fff;
+  padding: 0.4rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none; /* funkar även på <a> */
+  transition: background-color 0.2s ease;
+  font-family: inherit;
+}
+
+.button:hover {
+  background-color: #2f5943;
+}
+
+
+
+/* ====== STYLING PÅ KNAPP I NAV SOM LÄNK AKA A ====== */
+.auth-links a.button {
+  background-color: #396d53;
+  color: #fff !important;
+  padding: 0.4rem 1rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.auth-links a.button:hover {
+  background-color: #2f5943;
+}
+
+/* Visa desktop-versionen som standard */
+.desktop-auth {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Dölj mobilversionen */
+.mobile-auth {
+  display: none;
+}
+
+/* I mobilvy – gör tvärtom */
+@media (max-width: 1110px) {
+  .desktop-auth {
+    display: none;
+  }
+
+  .mobile-auth {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    justify-content: flex-start;
+  }
+}
+
+
+/* ====== Huvudinnehåll ====== */
+.main-content {
+  padding: 2rem;
+}
+
+.main-content h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.main-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/*** HERO SLIDER ***/
+.hero-slider {
+  position: relative;
+  height: 60vh;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.slide-content {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  text-align: left;
+  color: white;
+  max-width: 80%;
+}
+
+.slide-content h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.slide-content p {
+  font-size: 1.2rem;
+}
+
+/*** ARTICLES.html ***/
+.article-actions {
+  margin-bottom: 1rem;
+}
+
+.article-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.article-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.article-list a {
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  color: #396d53;
+  text-decoration: none;
+}
+
+.article-list a:hover {
+  text-decoration: underline;
+}
+
+/*** SCAN ***/
+.scanner-input {
+  margin-bottom: 2rem;
+}
+
+.scanner-input input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+/*** Scannad lista ***/
+.scanned-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.scanned-list li {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #ccc;
+}
+
+/*** Modal ***/
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  max-width: 300px;
+  width: 90%;
+}
+
+.modal-content input[type="number"] {
+  font-size: 1rem;
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0.5rem;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-align: left;
+  margin-top: 1rem;
+}
+
+.modal-content label {
+  font-weight: 500;
+}
+
+.modal-content input {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.modal-content button {
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  background-color: #396d53;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal-content button:hover {
+  background-color: #2f5943;
+}
+
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.block-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem; 
+  justify-content: center; 
+  padding: 2rem;
+}
+
+.block-in-block {
+  flex: 1 1 300px; 
+  max-width: 400px; 
+  border: 1px solid #ccc;
+  padding: 1rem;
+  background-color: #fff;
+}

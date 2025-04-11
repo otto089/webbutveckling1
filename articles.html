@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <title>Hantera artiklar</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="logged-in">
+  
+  <header class="header">
+    <div class="left-header">
+      <a href="/" class="logo">
+        <img src="/Media/inventerapp-logo-black.png" alt="INVENTERApp logotyp">
+      </a>
+
+           <!-- HAMBURGERE -->
+           <div class="hamburger" id="hamburgerBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+      <!-- NAVIGATIONSMENY -->
+      <nav class="menu" id="mainMenu">
+        <a href="/">Startsida</a>
+        <a href="/articles.html">Hantera artiklar</a>
+        <a href="/scan.html">Scanna</a>
+      </nav>
+    </div>
+
+    <div class="auth-links">
+      <span>Inloggad som <strong>admin</strong></span>
+      <a href="/" class="button">Logga ut</a>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <h1>Hantera artiklar</h1>
+
+    <section class="article-actions">
+      <a href="/articles/new" class="button">+ Lägg till ny artikel</a>
+    </section>
+
+    <section class="article-list">
+      <ul>
+        <li>
+          <strong>Tomater, färska</strong> – 24 i lager
+          <a href="#">Redigera</a> |
+          <a href="#">Radera</a>
+        </li>
+        <li>
+          <strong>Olivolja 1L</strong> – 12 i lager
+          <a href="#">Redigera</a> |
+          <a href="#">Radera</a>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    // Toggle för hamburgermenyn
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const menu = document.getElementById('mainMenu');
+
+     // Toggle för hamburgermenyn
+     hamburgerBtn.addEventListener('click', () => {
+        menu.classList.toggle('active');
+      });
+    })
+  </script>
+
+</body>
+</html>
